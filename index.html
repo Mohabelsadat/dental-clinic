@@ -1,1 +1,191 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>عيادة الأسنان</title>
+<style>
+:root{
+  --primary:#0ea5a4; --primary-dark:#0b8685; --bg:#ffffff; --bg-alt:#f4fbfb;
+  --text:#12232b; --text-soft:#5a6b72; --card:#ffffff; --border:#e3eef0;
+  --wa:#25D366; box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0f1a1d; --bg-alt:#132226; --text:#eaf5f5; --text-soft:#a9bcc0; --card:#152528; --border:#213538;
+}}
+:root[data-theme="dark"]{
+  --bg:#0f1a1d; --bg-alt:#132226; --text:#eaf5f5; --text-soft:#a9bcc0; --card:#152528; --border:#213538;
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px); scroll-behavior:smooth;}
+*{box-sizing:border-box;}
+body{margin:0;font-family:'Tahoma','Segoe UI',sans-serif;background:var(--bg);color:var(--text);}
+a{color:inherit;text-decoration:none;}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px;}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:var(--card);border-bottom:1px solid var(--border);}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;max-width:1080px;margin:0 auto;}
+.brand{font-weight:800;font-size:1.2rem;color:var(--primary-dark);display:flex;gap:8px;align-items:center;}
+.navlinks{display:flex;gap:18px;flex-wrap:wrap;font-size:.95rem;}
+.navlinks a:hover{color:var(--primary);}
+.btn{display:inline-block;padding:10px 20px;border-radius:10px;font-weight:700;font-size:.95rem;cursor:pointer;border:none;}
+.btn-primary{background:var(--primary);color:#fff;}
+.btn-primary:hover{background:var(--primary-dark);}
+.btn-wa{background:var(--wa);color:#fff;}
+.btn-outline{background:transparent;border:2px solid var(--primary);color:var(--primary);}
+.hero{background:linear-gradient(135deg,var(--bg-alt),var(--bg));padding:60px 0;text-align:center;}
+.hero h1{font-size:2.1rem;margin-bottom:10px;}
+.hero p{color:var(--text-soft);max-width:560px;margin:0 auto 24px;line-height:1.8;}
+.hero-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+section{padding:50px 0;}
+h2.title{text-align:center;font-size:1.6rem;margin-bottom:8px;}
+p.subtitle{text-align:center;color:var(--text-soft);margin-bottom:34px;}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;}
+.card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px;}
+.card .icon{font-size:1.8rem;margin-bottom:10px;}
+.card h3{margin:0 0 6px;font-size:1.05rem;}
+.card p{margin:0;color:var(--text-soft);font-size:.9rem;line-height:1.6;}
+.contact-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:26px;}
+@media(max-width:760px){.contact-grid{grid-template-columns:1fr;}}
+.form-field{margin-bottom:14px;}
+.form-field label{display:block;margin-bottom:6px;font-size:.88rem;color:var(--text-soft);}
+.form-field input,.form-field select,.form-field textarea{width:100%;padding:11px 12px;border-radius:9px;border:1px solid var(--border);background:var(--bg);color:var(--text);font-family:inherit;font-size:.95rem;}
+.form-field textarea{min-height:80px;resize:vertical;}
+.info-card{background:var(--bg-alt);border-radius:14px;padding:22px;border:1px solid var(--border);}
+.info-row{display:flex;gap:10px;align-items:flex-start;margin-bottom:14px;font-size:.92rem;}
+.info-row .ic{font-size:1.2rem;}
+.divider{margin:18px 0;border:none;border-top:1px solid var(--border);}
+footer{padding:26px 0;text-align:center;color:var(--text-soft);font-size:.85rem;border-top:1px solid var(--border);}
+#msg-status{margin-top:10px;font-size:.88rem;}
+.hidden{display:none !important;}
+.dash-wrap{max-width:900px;margin:0 auto;padding:30px 20px;}
+.dash-tabs{display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap;}
+.dash-tab{padding:8px 16px;border-radius:8px;border:1px solid var(--border);background:var(--card);cursor:pointer;font-size:.9rem;}
+.dash-tab.active{background:var(--primary);color:#fff;border-color:var(--primary);}
+.msg-item{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px;margin-bottom:12px;}
+.msg-item .top{display:flex;justify-content:space-between;font-size:.85rem;color:var(--text-soft);margin-bottom:6px;flex-wrap:wrap;gap:6px;}
+.msg-item h4{margin:0 0 4px;}
+.badge{background:var(--primary);color:#fff;border-radius:6px;padding:2px 8px;font-size:.75rem;}
+.wa-mini{color:var(--wa);font-weight:700;font-size:.85rem;}
+.settings-form .form-field{max-width:420px;}
+.floating-wa{position:fixed;bottom:calc(20px + env(safe-area-inset-bottom,0px));left:20px;background:var(--wa);color:#fff;width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.6rem;box-shadow:0 4px 14px rgba(0,0,0,.25);z-index:60;}
+</style>
+</head>
+<body>
 
+<header>
+  <div class="nav">
+    <div class="brand">🦷 <span id="brand-name">عيادة الأسنان</span></div>
+    <nav class="navlinks">
+      <a href="#services">خدماتنا</a>
+      <a href="#about">من نحن</a>
+      <a href="#contact">تواصل معنا</a>
+      <a href="#" id="dash-link" class="hidden">لوحة التحكم</a>
+    </nav>
+  </div>
+</header>
+
+<div id="site-view">
+  <section class="hero">
+    <div class="wrap">
+      <h1>ابتسامتك أمانة في أيدينا</h1>
+      <p>رعاية متكاملة لأسنانك بأحدث الأجهزة وأيدي أطباء متخصصين، في بيئة مريحة وآمنة لكل أفراد الأسرة.</p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn btn-primary">احجز موعدك الآن</a>
+        <a href="#" id="hero-wa" target="_blank" class="btn btn-wa">📱 واتساب مباشر</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="services">
+    <div class="wrap">
+      <h2 class="title">خدماتنا</h2>
+      <p class="subtitle">مجموعة كاملة من علاجات الأسنان تحت سقف واحد</p>
+      <div class="grid" id="services-grid"></div>
+    </div>
+  </section>
+
+  <section id="about" style="background:var(--bg-alt);">
+    <div class="wrap" style="text-align:center;max-width:700px;">
+      <h2 class="title">من نحن</h2>
+      <p style="color:var(--text-soft);line-height:1.9;">
+        فريقنا الطبي يجمع بين الخبرة والدقة، ونحرص على تقديم خطة علاج واضحة لكل حالة، مع متابعة مستمرة لضمان أفضل نتيجة وراحة تامة للمريض.
+      </p>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap contact-grid">
+      <div>
+        <h2 class="title" style="text-align:right;">تواصل معنا</h2>
+        <p class="subtitle" style="text-align:right;">املأ البيانات وسنعاود الاتصال بك، أو تواصل مباشرة عبر واتساب</p>
+        <form id="contact-form">
+          <div class="form-field"><label>الاسم</label><input type="text" id="f-name" required></div>
+          <div class="form-field"><label>رقم الهاتف</label><input type="tel" id="f-phone" required></div>
+          <div class="form-field"><label>البريد الإلكتروني (اختياري)</label><input type="email" id="f-email"></div>
+          <div class="form-field"><label>الخدمة المطلوبة</label>
+            <select id="f-service"></select>
+          </div>
+          <div class="form-field"><label>ملاحظات إضافية</label><textarea id="f-msg" placeholder="اكتب تفاصيل إضافية إن وجدت..."></textarea></div>
+          <button type="submit" class="btn btn-primary" style="width:100%;">إرسال الطلب</button>
+          <div id="msg-status"></div>
+        </form>
+        <div style="text-align:center;margin-top:16px;color:var(--text-soft);font-size:.9rem;">أو</div>
+        <a href="#" id="form-wa" target="_blank" class="btn btn-wa" style="width:100%;text-align:center;display:block;margin-top:12px;">📱 إرسال الطلب مباشرة عبر واتساب</a>
+      </div>
+      <div class="info-card">
+        <h3 style="margin-top:0;">بيانات التواصل</h3>
+        <div class="info-row"><span class="ic">📍</span><span id="info-address">العنوان غير محدد</span></div>
+        <div class="info-row"><span class="ic">📞</span><span id="info-phone">-</span></div>
+        <div class="info-row" id="row-landline"><span class="ic">☎️</span><span id="info-landline">-</span></div>
+        <div class="info-row"><span class="ic">✉️</span><span id="info-email">-</span></div>
+        <div class="info-row" id="row-insta"><span class="ic">📷</span><a id="info-insta" href="#" target="_blank">-</a></div>
+        <hr class="divider">
+        <a href="#" id="info-wa" target="_blank" class="btn btn-wa" style="width:100%;text-align:center;display:block;">تواصل عبر واتساب</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>© <span id="foot-year"></span> <span id="foot-name">عيادة الأسنان</span> — جميع الحقوق محفوظة</footer>
+</div>
+
+<a href="#" id="floating-wa" target="_blank" class="floating-wa hidden">📱</a>
+
+<!-- DASHBOARD -->
+<div id="dash-view" class="hidden">
+  <div class="dash-wrap">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+      <h2 style="margin:0;">لوحة التحكم</h2>
+      <a href="#" id="back-to-site" class="btn btn-outline">عودة للموقع</a>
+    </div>
+    <div class="dash-tabs">
+      <div class="dash-tab active" data-tab="messages">الرسائل الواردة</div>
+      <div class="dash-tab" data-tab="settings">إعدادات العيادة</div>
+    </div>
+    <div id="tab-messages">
+      <p id="no-owner-msg" class="hidden" style="color:var(--text-soft);">هذه الصفحة مخصصة لصاحب الموقع فقط.</p>
+      <div id="messages-list"></div>
+    </div>
+    <div id="tab-settings" class="hidden settings-form">
+      <div class="form-field"><label>اسم العيادة</label><input id="s-name"></div>
+      <div class="form-field"><label>رقم الهاتف (يظهر للعملاء)</label><input id="s-phone"></div>
+      <div class="form-field"><label>رقم واتساب (بصيغة دولية بدون + مثل 201001234567)</label><input id="s-whatsapp"></div>
+      <div class="form-field"><label>رقم أرضي (اختياري)</label><input id="s-landline"></div>
+      <div class="form-field"><label>البريد الإلكتروني</label><input id="s-email"></div>
+      <div class="form-field"><label>العنوان</label><input id="s-address"></div>
+      <div class="form-field"><label>رابط انستجرام (اختياري)</label><input id="s-insta" placeholder="https://instagram.com/..."></div>
+      <button class="btn btn-primary" id="save-settings">حفظ الإعدادات</button>
+      <div id="settings-status" style="margin-top:10px;font-size:.88rem;"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+const SERVICES = [
+  {icon:"🦷",name:"تنظيف وتلميع الأسنان",desc:"إزالة الجير والترسبات للحفاظ على صحة اللثة."},
+  {icon:"🩹",name:"حشوات الأسنان",desc:"حشوات تجميلية بلون الأسنان الطبيعي."},
+  {icon:"⚡",name:"علاج العصب (اللبية)",desc:"علاج جذور الأسنان بأحدث التقنيات وبدون ألم."},
+  {icon:"✨",name:"تبييض الأسنان",desc:"ابتسامة أكثر إشراقًا بجلسة آمنة وسريعة."},
+  {icon:"🔧",name:"تقويم الأسنان",desc:"تقويم معدني أو شفاف لتصحيح اصطفاف الأسنان."},
+  {icon:"🦴",name:"زراعة الأسنان",desc:"تعويض الأسنان المفقودة بزراعات ثابتة وطبيعية."},
+  {icon:"🪥",name:"طب أسنان الأطفال",desc:"رعاية متخصصة ولطيفة لأسنان الأطفال."},
+  {icon:"🦷",name:"خلع الأسنان الجراحي",desc:"خلع
