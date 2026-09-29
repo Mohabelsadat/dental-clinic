@@ -54,3 +54,486 @@ p.subtitle{text-align:center;color:var(--text-soft);margin-bottom:34px;}
   section{padding:34px 0;}
   h2.title{font-size:1.3rem;}
   p.subtitle{margin-bottom:22px;}
+  .nav{padding:10px 14px;flex-direction:column;gap:8px;}
+  .navlinks{justify-content:center;gap:12px;font-size:.85rem;}
+  .grid{gap:14px;}
+}
+.card h3{margin:0 0 6px;font-size:1.05rem;}
+.card p{margin:0;color:var(--text-soft);font-size:.9rem;line-height:1.6;}
+.contact-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:26px;}
+@media(max-width:760px){.contact-grid{grid-template-columns:1fr;}}
+.form-field{margin-bottom:14px;}
+.form-field label{display:block;margin-bottom:6px;font-size:.88rem;color:var(--text-soft);}
+.form-field input,.form-field select,.form-field textarea{width:100%;padding:11px 12px;border-radius:9px;border:1px solid var(--border);background:var(--bg);color:var(--text);font-family:inherit;font-size:.95rem;}
+.form-field textarea{min-height:80px;resize:vertical;}
+.info-card{background:var(--bg-alt);border-radius:14px;padding:22px;border:1px solid var(--border);}
+.info-row{display:flex;gap:10px;align-items:flex-start;margin-bottom:14px;font-size:.92rem;}
+.info-row .ic{font-size:1.2rem;}
+.divider{margin:18px 0;border:none;border-top:1px solid var(--border);}
+footer{padding:26px 0;text-align:center;color:var(--text-soft);font-size:.85rem;border-top:1px solid var(--border);}
+#msg-status{margin-top:10px;font-size:.88rem;}
+.hidden{display:none !important;}
+.dash-wrap{max-width:900px;margin:0 auto;padding:30px 20px;}
+.dash-tabs{display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap;}
+.dash-tab{padding:8px 16px;border-radius:8px;border:1px solid var(--border);background:var(--card);cursor:pointer;font-size:.9rem;}
+.dash-tab.active{background:var(--primary);color:#fff;border-color:var(--primary);}
+.msg-item{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px;margin-bottom:12px;}
+.msg-item .top{display:flex;justify-content:space-between;font-size:.85rem;color:var(--text-soft);margin-bottom:6px;flex-wrap:wrap;gap:6px;}
+.msg-item h4{margin:0 0 4px;}
+.badge{background:var(--primary);color:#fff;border-radius:6px;padding:2px 8px;font-size:.75rem;}
+.wa-mini{color:var(--wa);font-weight:700;font-size:.85rem;}
+.settings-form .form-field{max-width:420px;}
+.floating-wa{position:fixed;bottom:calc(20px + env(safe-area-inset-bottom,0px));left:20px;background:var(--wa);color:#fff;width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.6rem;box-shadow:0 4px 14px rgba(0,0,0,.25);z-index:60;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <div class="brand">⚕️ <span id="brand-name">مجمع كليوباترا الطبي</span></div>
+    <nav class="navlinks">
+      <a href="#services">تخصصاتنا</a>
+      <a href="#doctors">فريقنا الطبي</a>
+      <a href="#about">من نحن</a>
+      <a href="#contact">تواصل معنا</a>
+      <a href="#" id="dash-link" class="hidden">لوحة التحكم</a>
+    </nav>
+  </div>
+</header>
+
+<div id="site-view">
+  <section class="hero">
+    <div class="wrap">
+      <h1>رعايتك الصحية الكاملة تحت سقف واحد</h1>
+      <p>نخبة من الأطباء الاستشاريين في مختلف التخصصات، بأحدث الأجهزة وفي بيئة مريحة وآمنة لكل أفراد الأسرة.</p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn btn-primary">احجز موعدك الآن</a>
+        <a href="#" id="hero-wa" target="_blank" class="btn btn-wa">📱 واتساب مباشر</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="services">
+    <div class="wrap">
+      <h2 class="title">تخصصاتنا الطبية</h2>
+      <p class="subtitle">مجموعة متكاملة من الأقسام والتخصصات تحت سقف واحد</p>
+      <div class="grid" id="services-grid"></div>
+    </div>
+  </section>
+
+  <section id="doctors" style="background:var(--bg-alt);">
+    <div class="wrap">
+      <h2 class="title">فريقنا الطبي</h2>
+      <p class="subtitle">نخبة من الأطباء الاستشاريين في خدمتكم</p>
+      <div class="grid" id="doctors-grid"></div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap contact-grid">
+      <div>
+        <h2 class="title" style="text-align:right;">تواصل معنا</h2>
+        <p class="subtitle" style="text-align:right;">املأ البيانات وسنعاود الاتصال بك، أو تواصل مباشرة عبر واتساب</p>
+        <form id="contact-form">
+          <div class="form-field"><label>الاسم</label><input type="text" id="f-name" required></div>
+          <div class="form-field"><label>رقم الهاتف</label><input type="tel" id="f-phone" required></div>
+          <div class="form-field"><label>البريد الإلكتروني (اختياري)</label><input type="email" id="f-email"></div>
+          <div class="form-field"><label>الخدمة المطلوبة</label>
+            <select id="f-service"></select>
+          </div>
+          <div class="form-field hidden" id="f-doctor-wrap"><label>اختر الطبيب (اختياري)</label>
+            <select id="f-doctor"></select>
+          </div>
+          <div class="form-field"><label>ملاحظات إضافية</label><textarea id="f-msg" placeholder="اكتب تفاصيل إضافية إن وجدت..."></textarea></div>
+          <button type="submit" class="btn btn-primary" style="width:100%;">إرسال الطلب</button>
+          <div id="msg-status"></div>
+        </form>
+        <div style="text-align:center;margin-top:16px;color:var(--text-soft);font-size:.9rem;">أو</div>
+        <a href="#" id="form-wa" target="_blank" class="btn btn-wa" style="width:100%;text-align:center;display:block;margin-top:12px;">📱 إرسال الطلب مباشرة عبر واتساب</a>
+      </div>
+      <div class="info-card">
+        <h3 style="margin-top:0;">بيانات التواصل</h3>
+        <div class="info-row"><span class="ic">📍</span><span id="info-address">العنوان غير محدد</span></div>
+        <div class="info-row"><span class="ic">📞</span><span id="info-phone">-</span></div>
+        <div class="info-row" id="row-landline"><span class="ic">☎️</span><span id="info-landline">-</span></div>
+        <div class="info-row"><span class="ic">✉️</span><span id="info-email">-</span></div>
+        <div class="info-row" id="row-insta"><span class="ic">📷</span><a id="info-insta" href="#" target="_blank">-</a></div>
+        <hr class="divider">
+        <a href="#" id="info-wa" target="_blank" class="btn btn-wa" style="width:100%;text-align:center;display:block;">تواصل عبر واتساب</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" style="background:var(--bg-alt);">
+    <div class="wrap" style="text-align:center;max-width:700px;">
+      <h2 class="title">من نحن</h2>
+      <p style="color:var(--text-soft);line-height:1.9;">
+        فريقنا الطبي يجمع بين الخبرة والدقة، ونحرص على تقديم خطة علاج واضحة لكل حالة، مع متابعة مستمرة لضمان أفضل نتيجة وراحة تامة للمريض.
+      </p>
+    </div>
+  </section>
+
+  <footer>© <span id="foot-year"></span> <span id="foot-name">مجمع كليوباترا الطبي</span> — جميع الحقوق محفوظة</footer>
+</div>
+
+<a href="#" id="floating-wa" target="_blank" class="floating-wa hidden">📱</a>
+
+<!-- DASHBOARD -->
+<div id="dash-view" class="hidden">
+  <div class="dash-wrap">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+      <h2 style="margin:0;">لوحة التحكم</h2>
+      <a href="#" id="back-to-site" class="btn btn-outline">عودة للموقع</a>
+    </div>
+    <div class="dash-tabs">
+      <div class="dash-tab active" data-tab="messages">الرسائل الواردة</div>
+      <div class="dash-tab" data-tab="doctors">الأطباء</div>
+      <div class="dash-tab" data-tab="settings">إعدادات العيادة</div>
+    </div>
+    <div id="tab-messages">
+      <p id="no-owner-msg" class="hidden" style="color:var(--text-soft);">هذه الصفحة مخصصة لصاحب الموقع فقط.</p>
+      <div id="messages-list"></div>
+    </div>
+    <div id="tab-doctors" class="hidden settings-form">
+      <div class="form-field"><label>اسم الطبيب</label><input id="d-name" placeholder="د. محمد أحمد"></div>
+      <div class="form-field"><label>التخصص</label>
+        <select id="d-specialty"></select>
+      </div>
+      <button class="btn btn-primary" id="add-doctor">إضافة طبيب</button>
+      <div id="doctor-status" style="margin-top:10px;font-size:.88rem;"></div>
+      <hr class="divider">
+      <div id="doctors-admin-list"></div>
+    </div>
+    <div id="tab-settings" class="hidden settings-form">
+      <div class="form-field"><label>اسم العيادة</label><input id="s-name"></div>
+      <div class="form-field"><label>رقم الهاتف (يظهر للعملاء)</label><input id="s-phone"></div>
+      <div class="form-field"><label>رقم واتساب (بصيغة دولية بدون + مثل 201001234567)</label><input id="s-whatsapp"></div>
+      <div class="form-field"><label>رقم أرضي (اختياري)</label><input id="s-landline"></div>
+      <div class="form-field"><label>البريد الإلكتروني</label><input id="s-email"></div>
+      <div class="form-field"><label>العنوان</label><input id="s-address"></div>
+      <div class="form-field"><label>رابط انستجرام (اختياري)</label><input id="s-insta" placeholder="https://instagram.com/..."></div>
+      <button class="btn btn-primary" id="save-settings">حفظ الإعدادات</button>
+      <div id="settings-status" style="margin-top:10px;font-size:.88rem;"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ==== عدّل هنا اسم كل تخصص ووصفه حسب أقسام عيادتك الفعلية ====
+const SERVICES = [
+  {icon:"🦷",name:"طب الأسنان",desc:"تنظيف، حشو، تقويم، زراعة، وتبييض الأسنان."},
+  {icon:"🧴",name:"الجلدية والتجميل",desc:"علاج مشاكل البشرة وجلسات التجميل الآمنة."},
+  {icon:"👶",name:"طب الأطفال",desc:"متابعة نمو الأطفال وعلاج الأمراض الشائعة."},
+  {icon:"🩺",name:"الباطنة العامة",desc:"تشخيص ومتابعة الأمراض الداخلية المزمنة."},
+  {icon:"🦴",name:"العظام والمفاصل",desc:"علاج الكسور وآلام المفاصل والعمود الفقري."},
+  {icon:"🤰",name:"النساء والتوليد",desc:"متابعة الحمل والولادة وصحة المرأة."},
+  {icon:"👁️",name:"طب العيون",desc:"فحص وعلاج مشاكل النظر وأمراض العين."},
+  {icon:"👂",name:"الأنف والأذن والحنجرة",desc:"علاج مشاكل الجهاز التنفسي العلوي والسمع."}
+];
+
+let DOCTORS = [];
+
+const SUPABASE_URL = "https://towomanodhhqycbqfztk.supabase.co";
+const SUPABASE_KEY = "sb_publishable_juwQ9AQycw_pO78OjO_HMw_DyU6QGkJ";
+const DASH_PASSWORD = "dental2026";
+
+let SETTINGS = {name:"مجمع كليوباترا الطبي", phone:"01274679373", whatsapp:"201274679373", landline:"", email:"mohabelsadat@gmail.com", address:"أول شارع 25، أعلى فرغلي", insta:""};
+
+function renderServices(){
+  document.getElementById('services-grid').innerHTML = SERVICES.map(s=>{
+    const matched = DOCTORS.filter(d=>d.specialty===s.name).map(d=>d.name);
+    const doctorsText = matched.join('، ');
+    const msg = `مرحبًا، أرغب في حجز موعد في قسم ${s.name}${doctorsText?(' مع '+doctorsText):''}.`;
+    return `<a href="${waLink(msg)}" target="_blank" class="card" style="display:block;cursor:pointer;">
+      <div class="icon">${s.icon}</div><h3>${s.name}</h3><p>${s.desc}</p>
+      ${doctorsText?`<p style="margin-top:8px;color:var(--primary-dark);font-weight:700;font-size:.85rem;">${doctorsText}</p>`:''}
+    </a>`;
+  }).join('');
+  const sel = document.getElementById('f-service');
+  sel.innerHTML = SERVICES.map(s=>`<option value="${s.name}">${s.name}</option>`).join('') + `<option value="أخرى">أخرى / استشارة عامة</option>`;
+}
+
+function renderDoctors(){
+  const grid = document.getElementById('doctors-grid');
+  if(!DOCTORS.length){ grid.innerHTML = '<p style="color:var(--text-soft);grid-column:1/-1;text-align:center;">سيتم إضافة أعضاء الفريق الطبي قريبًا.</p>'; return; }
+  grid.innerHTML = DOCTORS.map(d=>{
+    const msg = `مرحبًا، أرغب في حجز موعد مع ${d.name} (${d.specialty}).`;
+    return `<a href="${waLink(msg)}" target="_blank" class="card" style="text-align:center;display:block;">
+      <div class="icon">👨‍⚕️</div><h3>${d.name}</h3><p>${d.specialty}</p>
+    </a>`;
+  }).join('');
+}
+
+async function loadDoctorsFromDb(){
+  try{
+    const rows = await supaSelect('doctors', 'select=*&order=created_at.asc');
+    DOCTORS = rows || [];
+    renderDoctors();
+    renderServices();
+    renderDoctorsAdminList();
+    updateDoctorOptions();
+  }catch(e){}
+}
+
+function waLink(text){
+  return `https://wa.me/${SETTINGS.whatsapp}?text=${encodeURIComponent(text)}`;
+}
+
+function applySettings(){
+  document.getElementById('brand-name').textContent = SETTINGS.name;
+  document.getElementById('foot-name').textContent = SETTINGS.name;
+  document.getElementById('info-address').textContent = SETTINGS.address;
+  document.getElementById('info-phone').textContent = SETTINGS.phone;
+  document.getElementById('info-email').textContent = SETTINGS.email;
+  const lr = document.getElementById('row-landline');
+  if(SETTINGS.landline){ lr.classList.remove('hidden'); document.getElementById('info-landline').textContent = SETTINGS.landline; }
+  else lr.classList.add('hidden');
+  const ir = document.getElementById('row-insta');
+  if(SETTINGS.insta){ ir.classList.remove('hidden'); const a=document.getElementById('info-insta'); a.href=SETTINGS.insta; a.textContent="تابعنا على انستجرام"; }
+  else ir.classList.add('hidden');
+  const genericMsg = `مرحبًا ${SETTINGS.name}، أرغب في الاستفسار عن حجز موعد.`;
+  document.getElementById('hero-wa').href = waLink(genericMsg);
+  document.getElementById('info-wa').href = waLink(genericMsg);
+  const fw = document.getElementById('floating-wa'); fw.href = waLink(genericMsg); fw.classList.remove('hidden');
+  document.getElementById('s-name').value = SETTINGS.name;
+  document.getElementById('s-phone').value = SETTINGS.phone;
+  document.getElementById('s-whatsapp').value = SETTINGS.whatsapp;
+  document.getElementById('s-landline').value = SETTINGS.landline;
+  document.getElementById('s-email').value = SETTINGS.email;
+  document.getElementById('s-address').value = SETTINGS.address;
+  document.getElementById('s-insta').value = SETTINGS.insta;
+}
+
+function updateDoctorOptions(){
+  const service = document.getElementById('f-service').value;
+  const wrap = document.getElementById('f-doctor-wrap');
+  const sel = document.getElementById('f-doctor');
+  const matched = DOCTORS.filter(d=>d.specialty===service);
+  if(matched.length){
+    wrap.classList.remove('hidden');
+    sel.innerHTML = `<option value="">بدون تحديد</option>` + matched.map(d=>`<option value="${d.name}">${d.name}</option>`).join('');
+  } else {
+    wrap.classList.add('hidden');
+    sel.innerHTML = '';
+  }
+}
+
+function updateFormWaLink(){
+  const name=document.getElementById('f-name').value.trim();
+  const phone=document.getElementById('f-phone').value.trim();
+  const service=document.getElementById('f-service').value;
+  const doctor=document.getElementById('f-doctor').value;
+  const note=document.getElementById('f-msg').value.trim();
+  let text = `مرحبًا ${SETTINGS.name}، معي طلب حجز:\nالاسم: ${name||'-'}\nالهاتف: ${phone||'-'}\nالخدمة: ${service||'-'}`;
+  if(doctor) text += `\nالطبيب المطلوب: ${doctor}`;
+  if(note) text += `\nملاحظات: ${note}`;
+  document.getElementById('form-wa').href = waLink(text);
+}
+document.getElementById('f-service').addEventListener('change', ()=>{ updateDoctorOptions(); updateFormWaLink(); });
+['f-name','f-phone','f-doctor','f-msg'].forEach(id=>{
+  document.addEventListener('input', e=>{ if(e.target && e.target.id===id) updateFormWaLink(); });
+  document.addEventListener('change', e=>{ if(e.target && e.target.id===id) updateFormWaLink(); });
+});
+
+renderServices();
+renderDoctors();
+applySettings();
+updateDoctorOptions();
+updateFormWaLink();
+document.getElementById('foot-year').textContent = new Date().getFullYear();
+
+async function loadRemoteSettings(){
+  try{
+    const rows = await supaSelect('clinic_settings', 'select=*&id=eq.1');
+    if(rows && rows.length){
+      SETTINGS = Object.assign({}, SETTINGS, rows[0]);
+      applySettings();
+      updateFormWaLink();
+      renderServices();
+    }
+  }catch(e){}
+}
+loadRemoteSettings();
+loadDoctorsFromDb();
+
+document.getElementById('dash-link').classList.remove('hidden');
+
+async function supaInsert(table, row){
+  const res = await fetch(`${SUPABASE_URL}/rest/v1/${table}`, {
+    method:'POST',
+    headers:{
+      'apikey': SUPABASE_KEY,
+      'Authorization': `Bearer ${SUPABASE_KEY}`,
+      'Content-Type':'application/json',
+      'Prefer':'return=minimal'
+    },
+    body: JSON.stringify(row)
+  });
+  if(!res.ok) throw new Error('insert failed');
+}
+
+async function supaSelect(table, query){
+  const res = await fetch(`${SUPABASE_URL}/rest/v1/${table}?${query}`, {
+    headers:{ 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` }
+  });
+  if(!res.ok) throw new Error('select failed');
+  return res.json();
+}
+
+async function supaUpsert(table, row, conflictCol){
+  const res = await fetch(`${SUPABASE_URL}/rest/v1/${table}?on_conflict=${conflictCol}`, {
+    method:'POST',
+    headers:{
+      'apikey': SUPABASE_KEY,
+      'Authorization': `Bearer ${SUPABASE_KEY}`,
+      'Content-Type':'application/json',
+      'Prefer':'resolution=merge-duplicates,return=minimal'
+    },
+    body: JSON.stringify(row)
+  });
+  if(!res.ok) throw new Error('upsert failed');
+}
+
+document.getElementById('contact-form').addEventListener('submit', async (e)=>{
+  e.preventDefault();
+  const entry = {
+    name: document.getElementById('f-name').value.trim(),
+    phone: document.getElementById('f-phone').value.trim(),
+    email: document.getElementById('f-email').value.trim(),
+    service: document.getElementById('f-service').value,
+    message: (document.getElementById('f-doctor').value ? ('الطبيب المطلوب: '+document.getElementById('f-doctor').value+'. ') : '') + document.getElementById('f-msg').value.trim()
+  };
+  const statusEl = document.getElementById('msg-status');
+  try{
+    await supaInsert('messages', entry);
+    statusEl.textContent='تم إرسال طلبك بنجاح، سنتواصل معك قريبًا ✅';
+    statusEl.style.color='#0ea5a4';
+    e.target.reset();
+    renderServices();
+    updateFormWaLink();
+  }catch(err){
+    statusEl.textContent='حدث خطأ أثناء الإرسال، برجاء المحاولة عبر واتساب.';
+    statusEl.style.color='#c0392b';
+  }
+});
+
+let dashUnlocked=false;
+document.getElementById('dash-link').addEventListener('click', (e)=>{
+  e.preventDefault();
+  if(!dashUnlocked){
+    const pass = prompt('كلمة سر لوحة التحكم:');
+    if(pass !== DASH_PASSWORD){ if(pass!==null) alert('كلمة السر غير صحيحة'); return; }
+    dashUnlocked = true;
+  }
+  document.getElementById('site-view').classList.add('hidden');
+  document.getElementById('dash-view').classList.remove('hidden');
+  document.getElementById('no-owner-msg').classList.add('hidden');
+  loadMessages();
+});
+document.getElementById('back-to-site').addEventListener('click', (e)=>{
+  e.preventDefault();
+  document.getElementById('dash-view').classList.add('hidden');
+  document.getElementById('site-view').classList.remove('hidden');
+});
+document.querySelectorAll('.dash-tab').forEach(tab=>{
+  tab.addEventListener('click', ()=>{
+    document.querySelectorAll('.dash-tab').forEach(t=>t.classList.remove('active'));
+    tab.classList.add('active');
+    const t=tab.dataset.tab;
+    document.getElementById('tab-messages').classList.toggle('hidden', t!=='messages');
+    document.getElementById('tab-doctors').classList.toggle('hidden', t!=='doctors');
+    document.getElementById('tab-settings').classList.toggle('hidden', t!=='settings');
+  });
+});
+
+function toWaNumber(phone){
+  let digits = (phone||'').replace(/\D/g,'');
+  if(digits.startsWith('0')) digits = '20' + digits.slice(1);
+  else if(!digits.startsWith('20')) digits = '20' + digits;
+  return digits;
+}
+
+async function loadMessages(){
+  const list = document.getElementById('messages-list');
+  list.innerHTML = '<p style="color:var(--text-soft);">جاري التحميل...</p>';
+  try{
+    const docs = await supaSelect('messages', 'select=*&order=created_at.desc');
+    if(!docs.length){ list.innerHTML='<p style="color:var(--text-soft);">لا توجد رسائل بعد.</p>'; return; }
+    list.innerHTML = docs.map(m=>{
+      const date = new Date(m.created_at).toLocaleString('ar-EG');
+      const waText = encodeURIComponent(`مرحبًا ${m.name}، بخصوص طلبك لخدمة ${m.service}...`);
+      return `<div class="msg-item">
+        <div class="top"><span>${date}</span><span class="badge">${m.service||'-'}</span></div>
+        <h4>${m.name||'بدون اسم'}</h4>
+        <p style="margin:2px 0;color:var(--text-soft);">📞 ${m.phone||'-'} ${m.email?(' | ✉️ '+m.email):''}</p>
+        ${m.message?`<p style="margin:6px 0;">${m.message}</p>`:''}
+        <a class="wa-mini" target="_blank" href="https://wa.me/${toWaNumber(m.phone)}?text=${waText}">الرد عبر واتساب ↗</a>
+      </div>`;
+    }).join('');
+  }catch(e){ list.innerHTML='<p>حدث خطأ في تحميل الرسائل — تأكد من تفعيل صلاحية القراءة (SELECT) في Supabase.</p>'; }
+}
+
+async function supaDelete(table, idCol, idVal){
+  const res = await fetch(`${SUPABASE_URL}/rest/v1/${table}?${idCol}=eq.${idVal}`, {
+    method:'DELETE',
+    headers:{ 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` }
+  });
+  if(!res.ok) throw new Error('delete failed');
+}
+
+function renderDoctorsAdminList(){
+  const el = document.getElementById('doctors-admin-list');
+  if(!el) return;
+  if(!DOCTORS.length){ el.innerHTML = '<p style="color:var(--text-soft);">لا يوجد أطباء مضافين بعد.</p>'; return; }
+  el.innerHTML = DOCTORS.map(d=>`
+    <div class="msg-item" style="display:flex;justify-content:space-between;align-items:center;">
+      <div><b>${d.name}</b> — ${d.specialty}</div>
+      <button class="btn btn-outline" style="padding:6px 12px;" data-del-doctor="${d.id}">حذف</button>
+    </div>`).join('');
+  el.querySelectorAll('[data-del-doctor]').forEach(btn=>{
+    btn.addEventListener('click', async ()=>{
+      try{ await supaDelete('doctors','id',btn.getAttribute('data-del-doctor')); await loadDoctorsFromDb(); }
+      catch(e){ alert('فشل حذف الطبيب'); }
+    });
+  });
+}
+
+document.getElementById('d-specialty').innerHTML = SERVICES.map(s=>`<option value="${s.name}">${s.name}</option>`).join('');
+
+document.getElementById('add-doctor').addEventListener('click', async ()=>{
+  const statusEl = document.getElementById('doctor-status');
+  const name = document.getElementById('d-name').value.trim();
+  const specialty = document.getElementById('d-specialty').value;
+  if(!name){ statusEl.textContent='اكتب اسم الطبيب أولاً.'; statusEl.style.color='#c0392b'; return; }
+  statusEl.textContent='جاري الإضافة...'; statusEl.style.color='var(--text-soft)';
+  try{
+    await supaInsert('doctors', {name, specialty});
+    document.getElementById('d-name').value='';
+    await loadDoctorsFromDb();
+    statusEl.textContent='تمت الإضافة بنجاح ✅'; statusEl.style.color='#0ea5a4';
+  }catch(e){ statusEl.textContent='فشلت الإضافة.'; statusEl.style.color='#c0392b'; }
+});
+
+document.getElementById('save-settings').addEventListener('click', async ()=>{
+  const statusEl = document.getElementById('settings-status');
+  const updated = {
+    id: 1,
+    name: document.getElementById('s-name').value.trim(),
+    phone: document.getElementById('s-phone').value.trim(),
+    whatsapp: document.getElementById('s-whatsapp').value.trim(),
+    landline: document.getElementById('s-landline').value.trim(),
+    email: document.getElementById('s-email').value.trim(),
+    address: document.getElementById('s-address').value.trim(),
+    insta: document.getElementById('s-insta').value.trim()
+  };
+  statusEl.textContent='جاري الحفظ...'; statusEl.style.color='var(--text-soft)';
+  try{
+    await supaUpsert('clinic_settings', updated, 'id');
+    SETTINGS = Object.assign({}, SETTINGS, updated);
+    applySettings(); updateFormWaLink(); renderServices();
+    statusEl.textContent='تم الحفظ بنجاح ✅ (هيظهر لأي حد يفتح الموقع من أي جهاز)'; statusEl.style.color='#0ea5a4';
+  }catch(e){ statusEl.textContent='فشل الحفظ — تأكد من عمل جدول clinic_settings في Supabase.'; statusEl.style.color='#c0392b'; }
+});
+</script>
+</body>
+</html>
